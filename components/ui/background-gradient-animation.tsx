@@ -4,21 +4,20 @@ import { useEffect, useRef, useState } from "react";
 
 export const BackgroundGradientAnimation = ({
   // Neutral, dark, very dark, and greyish blues
-  gradientBackgroundStart = "rgb(24, 34, 54)",      // dark blue-grey
-  gradientBackgroundEnd = "rgb(8, 16, 32)",         // very dark blue
-  firstColor = "44, 62, 80",                        // neutral blue-grey
-  secondColor = "36, 52, 92",                       // dark blue-grey
-  thirdColor = "70, 89, 120",                       // muted blue-grey
-  fourthColor = "20, 30, 50",                       // very dark blue
-  fifthColor = "90, 110, 140",                      // soft greyish blue
-  pointerColor = "60, 80, 120",                     // medium blue-grey
+  gradientBackgroundStart = "rgb(24, 34, 54)", // dark blue-grey
+  gradientBackgroundEnd = "rgb(8, 16, 32)", // very dark blue
+  firstColor = "44, 62, 80", // neutral blue-grey
+  secondColor = "36, 52, 92", // dark blue-grey
+  thirdColor = "70, 89, 120", // muted blue-grey
+  fourthColor = "20, 30, 50", // very dark blue
+  fifthColor = "90, 110, 140", // soft greyish blue
+  pointerColor = "60, 80, 120", // medium blue-grey
   size = "80%",
   blendingValue = "hard-light",
   children,
   className,
   interactive = true,
   containerClassName,
-  
 }: {
   gradientBackgroundStart?: string;
   gradientBackgroundEnd?: string;
@@ -58,7 +57,18 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--pointer-color", pointerColor);
     document.body.style.setProperty("--size", size);
     document.body.style.setProperty("--blending-value", blendingValue);
-  }, []);
+  }, [
+    gradientBackgroundStart,
+    gradientBackgroundEnd,
+    firstColor,
+    secondColor,
+    thirdColor,
+    fourthColor,
+    fifthColor,
+    pointerColor,
+    size,
+    blendingValue,
+  ]);
 
   useEffect(() => {
     function move() {
@@ -73,7 +83,7 @@ export const BackgroundGradientAnimation = ({
     }
 
     move();
-  }, [tgX, tgY]);
+  }, [tgX, tgY, curX, curY]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {

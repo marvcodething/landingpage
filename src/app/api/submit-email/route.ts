@@ -57,20 +57,21 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error submitting email:', error);
-    
     // Provide more specific error messages
-    if (error.response?.status === 403) {
-      const message = error.response?.data?.error?.message || error.message;
-      if (message.includes('API has not been used') || message.includes('is disabled')) {
-        return NextResponse.json(
-          { error: 'Google Sheets API is not enabled. Please enable it in Google Cloud Console.' },
-          { status: 500 }
-        );
+    if (error && typeof error === 'object' && 'response' in error) {
+      const errorResponse = (error as { response?: { status?: number; data?: { error?: { message?: string } } } }).response;
+      if (errorResponse?.status === 403) {
+        const message = errorResponse?.data?.error?.message || (error as { message?: string }).message;
+        if (message && (message.includes('API has not been used') || message.includes('is disabled'))) {
+          return NextResponse.json(
+            { error: 'Google Sheets API is not enabled. Please enable it in Google Cloud Console.' },
+            { status: 500 }
+          );
+        }
       }
     }
-    
     return NextResponse.json(
       { error: 'Failed to submit email. Please try again later.' },
       { status: 500 }

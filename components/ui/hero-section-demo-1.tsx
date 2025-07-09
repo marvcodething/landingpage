@@ -24,7 +24,7 @@ function HeroSectionOne() {
     }, 2500);
     
     return () => clearInterval(interval);
-  }, []);
+  }, [studySpots.length]);
 
   return (
     <div className="relative flex flex-col items-center justify-center min-h-screen w-full text-center overflow-hidden bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
