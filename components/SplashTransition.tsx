@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export function SplashTransition({ children }: { children: React.ReactNode }) {
   const [showSplash, setShowSplash] = useState(true);
   const [logoTransition, setLogoTransition] = useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
 
   useEffect(() => {
     // Disable scrolling during splash animation
@@ -17,6 +18,10 @@ export function SplashTransition({ children }: { children: React.ReactNode }) {
       setLogoTransition(true);
       setTimeout(() => {
         setShowSplash(false);
+        // Start content fade-in slightly after splash ends
+        setTimeout(() => {
+          setContentVisible(true);
+        }, 100);
         // Re-enable scrolling after animation completes
         document.body.style.overflow = 'auto';
       }, 1200);
@@ -61,10 +66,12 @@ export function SplashTransition({ children }: { children: React.ReactNode }) {
         </p>
       </div>
       <div
-        className={`transition-opacity duration-700 ${
+        className={`transition-opacity duration-1000 ease-out ${
           showSplash
             ? "opacity-0 pointer-events-none"
-            : "opacity-100 pointer-events-auto"
+            : contentVisible
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-auto"
         }`}
       >
         {children}
