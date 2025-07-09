@@ -44,29 +44,6 @@ const FEATURES_DATA = [
   },
 ];
 
-const STEPS_DATA = [
-  {
-    number: "01",
-    title: "Discover",
-    description:
-      "AI analyzes your preferences and past productivity to recommend ideal study environments.",
-    icon: "🔍",
-  },
-  {
-    number: "02",
-    title: "Optimize",
-    description:
-      "Track your sessions and get insights on which locations boost your performance.",
-    icon: "📈",
-  },
-  {
-    number: "03",
-    title: "Connect",
-    description:
-      "Share experiences and discover new spots through our student community.",
-    icon: "🌟",
-  },
-];
 
 function FeaturesAndProcess() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -75,22 +52,22 @@ function FeaturesAndProcess() {
     <>
       {/* Dark section - Detailed features */}
       <div className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">
-              Advanced capabilities for serious students
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Advanced capabilities for productive people
             </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Dive deeper into the powerful features that make StudySpot your ultimate study companion
+            <p className="text-base md:text-xl text-slate-300 max-w-2xl mx-auto px-4">
+              Dive deeper into the powerful features that make StudySpot your ultimate productivity companion
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="space-y-4 md:space-y-6">
               {FEATURES_DATA.map((feature, index) => (
                 <div
                   key={index}
-                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+                  className={`p-4 md:p-6 rounded-xl cursor-pointer transition-all duration-300 ${
                     activeFeature === index
                       ? "bg-slate-700 border-l-4 border-blue-400"
                       : "bg-slate-750 hover:bg-slate-700"
@@ -98,8 +75,8 @@ function FeaturesAndProcess() {
                   onClick={() => setActiveFeature(index)}
                 >
                   <div className="flex items-center mb-2">
-                    <span className="text-2xl mr-3">{feature.icon}</span>
-                    <h3 className="text-xl font-semibold text-white">
+                    <span className="text-xl md:text-2xl mr-3">{feature.icon}</span>
+                    <h3 className="text-lg md:text-xl font-semibold text-white">
                       {feature.title}
                     </h3>
                   </div>
@@ -108,7 +85,7 @@ function FeaturesAndProcess() {
               ))}
             </div>
 
-            <div className="bg-slate-700 rounded-2xl p-8">
+            <div className="bg-slate-700 rounded-2xl p-6 md:p-8">
               <h3 className="text-2xl font-bold text-white mb-4">
                 {FEATURES_DATA[activeFeature].title}
               </h3>

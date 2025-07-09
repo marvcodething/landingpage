@@ -7,11 +7,26 @@ export function SplashTransition({ children }: { children: React.ReactNode }) {
   const [logoTransition, setLogoTransition] = useState(false);
 
   useEffect(() => {
+    // Disable scrolling during splash animation
+    document.body.style.overflow = 'hidden';
+    
+    // Ensure page starts at top
+    window.scrollTo(0, 0);
+    
     const splashTimeout = setTimeout(() => {
       setLogoTransition(true);
-      setTimeout(() => setShowSplash(false), 1200);
-    }, 2000);
-    return () => clearTimeout(splashTimeout);
+      setTimeout(() => {
+        setShowSplash(false);
+        // Re-enable scrolling after animation completes
+        document.body.style.overflow = 'auto';
+      }, 1200);
+    }, 800); // was 2000, now much quicker to start
+    
+    return () => {
+      clearTimeout(splashTimeout);
+      // Cleanup: ensure scrolling is re-enabled if component unmounts
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
   return (
@@ -21,8 +36,8 @@ export function SplashTransition({ children }: { children: React.ReactNode }) {
           className={`absolute transition-all duration-1000 ease-in-out
             ${
               logoTransition
-                ? "top-8 left-8 w-56 h-auto"
-                : "top-1/2 left-1/2 w-[600px] h-auto -translate-x-1/2 -translate-y-1/2"
+                ? "top-4 left-4 md:top-8 md:left-8 w-32 md:w-56 h-auto"
+                : "top-1/2 left-1/2 w-[300px] md:w-[600px] h-auto -translate-x-1/2 -translate-y-1/2"
             }
           `}
           style={{ zIndex: 30 }}

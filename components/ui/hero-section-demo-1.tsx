@@ -31,7 +31,6 @@ function HeroSectionOne() {
       
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-800/40 via-slate-700/40 to-slate-900/40"></div>
-      
       {/* Main content */}
       <div className="relative z-10">
         <h1 className="text-6xl font-bold text-white mb-4 tracking-wide drop-shadow-lg">
